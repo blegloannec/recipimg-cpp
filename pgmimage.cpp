@@ -37,7 +37,7 @@ PGMImage::color PGMImage::get_pixel(uint x, uint y) const {
 
 void PGMImage::save(const char *fname) const {
   FILE *F = fopen(fname, "w");
-  fprintf(F, "P5\n%d %d\n255\n", W, H);
+  fprintf(F, "P5\n%d %d\n%d\n", W, H, max_color);
   for (uint y=0; y<H; ++y)
     for (uint x=0; x<W; ++x)
       fprintf(F, "%c", M[x+y*W]);
@@ -46,7 +46,7 @@ void PGMImage::save(const char *fname) const {
 
 void PGMImage::save_ascii(const char *fname) const {
   FILE *F = fopen(fname, "w");
-  fprintf(F, "P2\n%d %d\n255\n", W, H);
+  fprintf(F, "P2\n%d %d\n%d\n", W, H, max_color);
   for (uint y=0; y<H; ++y)
     for (uint x=0; x<W; ++x)
       fprintf(F, "%d%c", M[x+y*W], (x+1==W ? '\n' : ' '));
